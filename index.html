@@ -1,42 +1,195 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#f7fbfa" />
-  <meta name="description" content="ワンちゃんが会話をサポートする、やさしい1on1アプリ「わんおーわん」" />
-  <title>わんおーわん｜話そう。聞こう。わんこと一緒に。</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#166f68">
+  <meta name="description" content="ワンちゃんが会話をサポートする、やさしい1on1アプリ">
+  <title>わんおーわん｜ワンちゃんと一緒に1on1</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🐾%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
 </head>
 <body>
-  <div class="app-bg" aria-hidden="true">
-    <span class="blob blob-a"></span><span class="blob blob-b"></span><span class="paw paw-a">🐾</span><span class="paw paw-b">🐾</span>
-  </div>
-  <div id="app">
-    <header class="site-header">
-      <button class="brand" id="homeButton" type="button" aria-label="トップへ戻る">
-        <span class="brand-mark" aria-hidden="true">🐾</span>
-        <span>わんおーわん</span>
-      </button>
-      <nav class="top-nav" aria-label="メインメニュー">
-        <button class="nav-link" id="historyButton" type="button">
-          <span aria-hidden="true">◷</span><span class="nav-label">これまでの記録</span>
-        </button>
-      </nav>
-    </header>
+  <a class="skip-link" href="#main-content">本文へ移動</a>
+  <header class="app-header">
+    <button class="brand" type="button" data-action="home" aria-label="トップへ戻る">
+      <span aria-hidden="true">🐾</span><span>わんおーわん</span>
+    </button>
+    <button class="header-history" type="button" data-action="history">
+      <span aria-hidden="true">🗂️</span><span>これまでの記録</span>
+    </button>
+  </header>
 
-    <main id="main" tabindex="-1"></main>
+  <main id="main-content" tabindex="-1">
+    <section id="home-screen" class="screen is-active hero-screen" aria-labelledby="home-title">
+      <div class="hero-copy">
+        <p class="eyebrow">ONE-ON-ONE WITH A FRIENDLY GUIDE</p>
+        <h1 id="home-title">話そう。聞こう。<br><span>わんこと一緒に。</span></h1>
+        <p class="lead">選ぶだけで会話が始まる、やさしい1on1。<br>ワンちゃんが二人の間で、話すきっかけを届けます。</p>
+        <div class="hero-actions">
+          <button class="primary-button large" type="button" data-action="start">🐶 1on1をはじめる</button>
+          <button class="secondary-button large" type="button" data-action="history">これまでの記録</button>
+        </div>
+        <p class="privacy-note"><span aria-hidden="true">🔒</span> 記録はこのブラウザーだけに保存されます</p>
+      </div>
+      <div class="hero-art" aria-label="向かい合う二人と、その間で会話を応援するワンちゃん">
+        <div class="person person-left" aria-hidden="true">
+          <span class="person-hair"></span><span class="person-face">☺</span><span class="person-body"></span>
+        </div>
+        <div class="dog-stage dog-happy" aria-hidden="true">
+          <span class="sparkle sparkle-one">✦</span><span class="sparkle sparkle-two">✦</span>
+          <div class="dog-shadow"></div>
+          <div class="dog-tail"></div>
+          <div class="dog-body"></div>
+          <div class="dog-head">
+            <span class="dog-ear left"></span><span class="dog-ear right"></span>
+            <span class="dog-eye left"></span><span class="dog-eye right"></span>
+            <span class="dog-muzzle"></span><span class="dog-nose"></span><span class="dog-mouth"></span>
+            <span class="dog-cheek left"></span><span class="dog-cheek right"></span>
+          </div>
+          <div class="dog-paws"><span></span><span></span></div>
+        </div>
+        <div class="person person-right" aria-hidden="true">
+          <span class="person-hair"></span><span class="person-face">☺</span><span class="person-body"></span>
+        </div>
+      </div>
+      <div class="feature-row" aria-label="アプリの特徴">
+        <span>✓ 選ぶだけで回答</span><span>✓ ワンちゃんがコメント</span><span>✓ 自動で記録</span>
+      </div>
+    </section>
 
-    <footer class="site-footer">
-      <span>🐾</span> 会話の内容は、このブラウザーの中だけに保存されます
-    </footer>
-  </div>
+    <section id="setup-screen" class="screen narrow-screen" aria-labelledby="setup-title">
+      <button class="text-button back-button" type="button" data-action="home">← トップへ</button>
+      <div class="panel setup-panel">
+        <div class="mini-dog" aria-hidden="true">🐶</div>
+        <p class="step-label">STEP 1 / 3</p>
+        <h2 id="setup-title">今日は誰と話す？</h2>
+        <p class="subcopy">二人の名前を教えてね。ニックネームでもOKだワン！</p>
+        <form id="setup-form" novalidate>
+          <label for="your-name">あなたの名前</label>
+          <input id="your-name" name="yourName" type="text" maxlength="30" autocomplete="name" placeholder="例：じゅんこ" required>
+          <label for="partner-name">お話しする相手の名前</label>
+          <input id="partner-name" name="partnerName" type="text" maxlength="30" placeholder="例：まり" required>
+          <p id="setup-error" class="form-error" role="alert"></p>
+          <button class="primary-button full" type="submit">はじめる <span aria-hidden="true">→</span></button>
+        </form>
+      </div>
+    </section>
+
+    <section id="mood-screen" class="screen narrow-screen" aria-labelledby="mood-title">
+      <button class="text-button back-button" type="button" data-action="setup">← 名前入力へ</button>
+      <div class="panel">
+        <p class="step-label">STEP 2 / 3</p>
+        <h2 id="mood-title">今の気分はどう？</h2>
+        <p class="subcopy">直感で選んで大丈夫。あなたのペースで話そう。</p>
+        <div id="mood-options" class="mood-grid" role="radiogroup" aria-label="今の気分"></div>
+        <div id="mood-comment" class="dog-comment compact" aria-live="polite" hidden>
+          <span class="comment-avatar" aria-hidden="true">🐶</span>
+          <p></p>
+        </div>
+        <button id="mood-next" class="primary-button full" type="button" disabled>質問へ進む <span aria-hidden="true">→</span></button>
+      </div>
+    </section>
+
+    <section id="question-screen" class="screen question-screen" aria-labelledby="question-title">
+      <div class="question-topbar">
+        <button class="text-button" type="button" id="question-back">← 前へ</button>
+        <div class="progress-wrap" aria-label="質問の進捗">
+          <div class="progress-meta"><span id="progress-label">1 / 6</span><span id="progress-percent">17%</span></div>
+          <div class="progress-track"><div id="progress-bar" class="progress-bar"></div></div>
+        </div>
+        <button class="text-button save-exit" type="button" data-action="save-exit">一時保存して終了</button>
+      </div>
+
+      <div class="conversation-layout">
+        <aside class="facilitator-card" aria-label="ワンちゃんファシリテーター">
+          <div id="question-dog" class="dog-stage dog-thinking" aria-hidden="true">
+            <div class="dog-shadow"></div><div class="dog-tail"></div><div class="dog-body"></div>
+            <div class="dog-head">
+              <span class="dog-ear left"></span><span class="dog-ear right"></span>
+              <span class="dog-eye left"></span><span class="dog-eye right"></span>
+              <span class="dog-muzzle"></span><span class="dog-nose"></span><span class="dog-mouth"></span>
+              <span class="dog-cheek left"></span><span class="dog-cheek right"></span>
+            </div>
+            <div class="dog-paws"><span></span><span></span></div>
+          </div>
+          <span class="dog-name">ファシリテーター・わんこ</span>
+          <div id="dog-speech" class="speech-bubble" aria-live="polite">気になるものを選んでね。正解はないワン！</div>
+        </aside>
+
+        <div class="question-card">
+          <p id="question-kicker" class="question-kicker">CHECK-IN</p>
+          <h2 id="question-title"></h2>
+          <p class="selection-help">近いものを1つ選んでください</p>
+          <div id="answer-options" class="answer-options" role="radiogroup" aria-labelledby="question-title"></div>
+          <div id="other-wrap" class="other-wrap" hidden>
+            <label for="other-answer">自由に書いてください</label>
+            <textarea id="other-answer" rows="3" maxlength="300" placeholder="ここに入力…"></textarea>
+            <div class="character-count"><span id="other-count">0</span> / 300</div>
+          </div>
+          <div class="question-actions">
+            <button id="question-next" class="primary-button" type="button" disabled>次へ <span aria-hidden="true">→</span></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="review-screen" class="screen review-screen" aria-labelledby="review-title">
+      <button class="text-button back-button" type="button" id="review-back">← 最後の質問へ</button>
+      <div class="review-header">
+        <span class="celebration" aria-hidden="true">🐶 🎉</span>
+        <p class="step-label">FINISH</p>
+        <h2 id="review-title">今日のわんおーわん</h2>
+        <p id="review-subtitle" class="subcopy"></p>
+      </div>
+      <div id="review-answers" class="review-grid"></div>
+      <div class="reflection-grid">
+        <label class="reflection-card">気づいたこと<textarea id="insight" rows="4" maxlength="500" placeholder="今日の気づきをメモ…"></textarea></label>
+        <label class="reflection-card">次にやること<textarea id="next-action" rows="4" maxlength="500" placeholder="次回までにやること…"></textarea></label>
+        <label class="reflection-card">次回話したいこと<textarea id="next-topic" rows="4" maxlength="500" placeholder="次回のテーマ…"></textarea></label>
+      </div>
+      <div class="finish-message">
+        <span aria-hidden="true">🐾</span>
+        <p>今日もいっぱい話せたね！<br>また次のわんおーわんで会おう。</p>
+      </div>
+      <div class="review-actions">
+        <button id="save-record" class="primary-button large" type="button">記録を保存する</button>
+      </div>
+    </section>
+
+    <section id="history-screen" class="screen history-screen" aria-labelledby="history-title">
+      <div class="history-heading">
+        <div><p class="eyebrow">OUR CONVERSATIONS</p><h2 id="history-title">これまでのわんおーわん</h2></div>
+        <button class="primary-button" type="button" data-action="start">＋ 新しい1on1</button>
+      </div>
+      <div class="history-controls">
+        <label class="search-box"><span aria-hidden="true">🔎</span><span class="sr-only">記録を検索</span><input id="history-search" type="search" placeholder="名前や回答で検索"></label>
+      </div>
+      <div id="history-list" class="history-list"></div>
+      <div id="history-empty" class="empty-state" hidden>
+        <div aria-hidden="true">🐾</div><h3>まだ記録がありません</h3><p>最初のわんおーわんを始めてみよう。</p>
+        <button class="primary-button" type="button" data-action="start">1on1をはじめる</button>
+      </div>
+    </section>
+
+    <section id="detail-screen" class="screen detail-screen" aria-labelledby="detail-title">
+      <button class="text-button back-button" type="button" data-action="history">← 一覧へ戻る</button>
+      <div id="detail-content"></div>
+    </section>
+  </main>
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
-  <div id="modalRoot"></div>
-  <script src="app.js"></script>
+
+  <dialog id="confirm-dialog" class="confirm-dialog">
+    <form method="dialog">
+      <span class="dialog-icon" aria-hidden="true">🐾</span>
+      <h2>この記録を削除しますか？</h2>
+      <p>削除した記録は元に戻せません。</p>
+      <div class="dialog-actions"><button value="cancel" class="secondary-button">キャンセル</button><button value="confirm" class="danger-button">削除する</button></div>
+    </form>
+  </dialog>
+
+  <noscript><p class="noscript">このアプリを使うにはJavaScriptを有効にしてください。</p></noscript>
 </body>
 </html>
